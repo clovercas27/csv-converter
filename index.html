@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSV Template Converter</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">CSV Template Converter</p>
+            <h1>Convert CSVs into FlipTheLook templates.</h1>
+          </div>
+          <button id="downloadBtn" class="primary-action" type="button" disabled>
+            <span aria-hidden="true">&darr;</span>
+            Download CSV
+          </button>
+        </header>
+
+        <section class="upload-grid" aria-label="CSV uploads">
+          <div class="upload-panel source-panel">
+            <span class="step">1</span>
+            <span class="panel-title">Upload base CSV</span>
+            <span class="panel-copy">Choose the source format first, then upload the product export.</span>
+            <span class="source-controls">
+              <label class="field-label" for="baseTemplate">Base template</label>
+              <select id="baseTemplate" class="panel-select">
+                <option value="faire">Faire</option>
+                <option value="generic">Generic CSV</option>
+              </select>
+              <label class="file-button" for="baseCsv">Choose CSV</label>
+              <input id="baseCsv" type="file" accept=".csv,text/csv">
+              <span id="baseFileName" class="file-name">No file selected</span>
+            </span>
+          </div>
+
+          <div class="upload-panel template-panel">
+            <span class="step">2</span>
+            <span class="panel-title">Choose FlipTheLook template</span>
+            <span class="panel-copy">The destination columns come from FlipTheLook's product importer.</span>
+            <span class="template-toggle" role="group" aria-label="FlipTheLook template">
+              <button id="openPackBtn" class="template-option is-active" type="button">Open pack</button>
+              <button id="prepackBtn" class="template-option" type="button">Prepack</button>
+            </span>
+          </div>
+        </section>
+
+        <section class="controls-row">
+          <div class="status-card">
+            <span class="status-label">Base rows</span>
+            <strong id="baseRowCount">0</strong>
+          </div>
+          <div class="status-card">
+            <span class="status-label">Template columns</span>
+            <strong id="copyColumnCount">15</strong>
+          </div>
+          <button id="autoMapBtn" class="secondary-action" type="button" disabled>Auto-match names</button>
+          <button id="clearMapBtn" class="ghost-action" type="button" disabled>Clear mapping</button>
+        </section>
+
+        <section class="mapping-section" aria-labelledby="mappingTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Step 3</p>
+              <h2 id="mappingTitle">Connect FlipTheLook columns to source columns</h2>
+            </div>
+            <span id="mappingStatus" class="quiet-status">Upload a base CSV to start.</span>
+          </div>
+          <div id="mappingTable" class="mapping-table empty-state">
+            <p>FlipTheLook template columns will appear here.</p>
+          </div>
+        </section>
+        <section class="category-section" aria-labelledby="categoryTitle">
+          <div class="section-heading">
+            <div>
+              <h2 id="categoryTitle">Bulk rename categories</h2>
+              <p class="panel-copy">Rename each Collection across all matching products. Leave blank to keep the original name.</p>
+            </div>
+            <button id="resetCategoriesBtn" class="ghost-action" type="button" disabled>Reset names</button>
+          </div>
+          <div id="categoryTable" class="category-table empty-state">
+            <p>Upload a CSV to see its categories.</p>
+          </div>
+        </section>
+      </section>
+
+      <aside class="preview-panel" aria-labelledby="previewTitle">
+        <div class="section-heading compact">
+          <div>
+            <p class="eyebrow">Step 4</p>
+            <h2 id="previewTitle">Preview</h2>
+          </div>
+          <span id="previewMeta" class="quiet-status">No output yet</span>
+        </div>
+        <div id="previewTable" class="preview-table empty-state">
+          <p>Map at least one column to preview the converted CSV.</p>
+        </div>
+      </aside>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
